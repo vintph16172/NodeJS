@@ -1,3 +1,4 @@
+import { log } from 'console'
 import Product from '../models/products'
 // const products = [
 //     {id:1,name:"Product 1"},
@@ -7,6 +8,7 @@ import Product from '../models/products'
 export const listProduct = async (request,response)=>{
     try{
         const product = await Product.find().exec()
+        console.log("abc");
         response.json(product)
         // response.json(products)
     }catch(error){
@@ -53,4 +55,17 @@ export const updateProduct = async (request,response)=>{
         response.status(400).json({message:"Loi khong update duoc"})
     }
     // response.json(products.map(item => item.id === +request.params.id? request.body:item))
+}
+
+export const searchProduct = async (request,response)=>{
+    try {
+        const search = "/"+request.params.search+"/i"
+        console.log(2);
+        console.log(search);
+        const product = await Product.find({name: search},'name').exec()
+        response.json(product)
+    } catch (error) {
+        response.status(400).json({message:"Không Tìm Thấy Sản Phẩm"})
+    }
+
 }

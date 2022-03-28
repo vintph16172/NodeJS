@@ -5,6 +5,7 @@ import homeRoute from './routes/home'
 import productRoute from "./routes/products"
 import categoryRoute from './routes/category'
 import { checkAuth } from './middlewares/checkAuth';
+import authRouter from './routes/auth';
 const app = express();
 
 // const homeRoute = require('./routes/home');
@@ -14,6 +15,7 @@ app.use(express.json())
 app.use(homeRoute);
 app.use("/api",checkAuth,productRoute);
 app.use("/api",categoryRoute)
+app.use("/api",authRouter)
 
 mongoose.connect('mongodb://localhost:27017/nodeJS');
 
