@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import {createHmac} from 'crypto'
+import { v4 as uuidv4 } from 'uuid'
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -14,12 +15,30 @@ const userSchema = new mongoose.Schema({
     password:{
         type: String,
         required:true
+    },
+    role:{
+        type: Number,
+        default: 0
+    },
+    salt:{
+        type: String
     }
 })
+
+userSchema.pre("save",function(next){
+    try {
+        this.salt = uuidv4()
+        this.password = this.encrytPassword(this.password)
+        next()
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 userSchema.methods = {
     authenticate(password){
         try {
-           return this.password == this.encrytPassword(password)
+           return this.password === this.encrytPassword(password)
         } catch (error) {
             console.log(error);
         }
@@ -28,21 +47,14 @@ userSchema.methods = {
     encrytPassword(password){
         if(!password) return
         try {
-            return createHmac("sha256",password).update(password).digest("hex")
+            return createHmac("sha256",this.salt).update(password).digest("hex")
         } catch (error) {
             console.log(error);
         }
     }
 
 }
-userSchema.pre("save",function(next){
-    try {
-        this.password = this.encrytPassword(this.password)
-        next()
-    } catch (error) {
-        console.log(error);
-    }
-})
+
 
 
 

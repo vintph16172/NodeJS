@@ -1,4 +1,5 @@
 import User from '../models/user'
+import jwt from 'jsonwebtoken'
 
 export const signup = async (request,response)=>{
     const {email, name, password } = request.body
@@ -30,7 +31,10 @@ export const signin = async (request,response)=>{
     if (!user.authenticate(password)) {
         return response.status(400).json({message:"Mat khau khong dung"})
     }
+    const token = jwt.sign({_id: user._id},"123456",{expiresIn: "4h"})
+
     response.json({
+        token,
         user:{
             _id: user._id,
             email: user.email,
