@@ -23,8 +23,8 @@ export const listDetailCart = async (request, response) => {
 export const listDetailCartById = async (request, response) => {
     try {
         const detailCart = await DetailCart.findOne({ _id: request.params.id }).exec()
-        
-        response.json(detailCart)
+        const products = await Product.find({_id: detailCart.product }).exec()
+        response.json({detailCart,products})
     } catch (error) {
         response.status(400).json({ message: "Khong tim thay data" })
     }

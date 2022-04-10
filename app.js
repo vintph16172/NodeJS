@@ -9,6 +9,8 @@ import authRouter from './routes/auth';
 import cors from 'cors'
 import cartRoute from './routes/cart';
 import detailCartRoute from './routes/detailCart';
+import couponRoute from './routes/coupon'
+
 
 const app = express();
 
@@ -28,6 +30,7 @@ app.use("/api", categoryRoute)
 app.use("/api", authRouter)
 app.use("/api",cartRoute)
 app.use("/api",detailCartRoute)
+app.use("/api",couponRoute)
 
 
 mongoose.connect('mongodb://localhost:27017/nodeJS');

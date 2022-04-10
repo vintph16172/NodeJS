@@ -22,7 +22,7 @@ export const listCart = async (request, response) => {
 }
 export const listCartDetail = async (request, response) => {
     try {
-        const cart = await Cart.findOne({ _id: request.params.id }).exec()
+        const cart = await Cart.find({ email: request.params.email }).exec()
         const detailCart = await DetailCart.find({ cart }).populate("cart").exec()
         response.json({ cart, detailCart })
     } catch (error) {

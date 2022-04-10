@@ -7,8 +7,8 @@ const detailCartSchema = new mongoose.Schema({
 
     },
     product:{
-        type: ObjectId,
-        ref: "Product"
+        type: String,
+        required:true
     },
     quantity:{
         type: Number,

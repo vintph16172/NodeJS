@@ -18,9 +18,9 @@ export const listProduct = async (request, response) => {
     try {
 
         if (search) {
-            const re = new RegExp(`${search}`);
+            const searchQuery = new RegExp(`${search}`);
             console.log(re);
-            const product = await Product.find({ name: re }).exec()
+            const product = await Product.find({ name: searchQuery }).exec()
             response.json(product)
         } else if(priceMin && priceMax){
             const product = await Product.find().where('price').gte(priceMin).lte(priceMax).exec()

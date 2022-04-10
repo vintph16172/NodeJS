@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 router.get('/cart',listCart)
-router.get('/cart/:id',listCartDetail)
+router.get('/cart/:email',listCartDetail)
 router.post('/cart', createCart)
 router.delete('/cart/:id',deleteCart)
 router.put('/cart/:id',updateCart)
