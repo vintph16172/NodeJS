@@ -50,8 +50,11 @@ export const deleteCart = async (request, response) => {
 export const updateCart = async (request, response) => {
     try {
         const cart = await Cart.findOneAndUpdate({ _id: request.params.id }, request.body, { new: true }).exec()
+        console.log(request.params.id);
         response.json(cart)
+
     } catch (error) {
+        console.log(request.params.id);
         response.status(400).json({ message: "Loi khong update duoc" })
     }
     

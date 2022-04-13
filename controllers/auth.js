@@ -37,9 +37,13 @@ export const signin = async (request,response)=>{
         token,
         user:{
             _id: user._id,
+            avatar: user.avatar,
             email: user.email,
             name: user.name,
-            role: user.role
+            address: user.address,
+            phone: user.phone,
+            role: user.role,
+            createAt: user.createAt
         }
     })
 

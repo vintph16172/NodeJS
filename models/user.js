@@ -3,6 +3,10 @@ import {createHmac} from 'crypto'
 import { v4 as uuidv4 } from 'uuid'
 
 const userSchema = new mongoose.Schema({
+    avatar:{
+        type: String,
+        required:true
+    },
     name:{
         type: String,
         trim:true,
@@ -10,6 +14,14 @@ const userSchema = new mongoose.Schema({
     },
     email:{
         type:String,
+        required:true
+    },
+    address:{
+        type:String,
+        required:true
+    },
+    phone:{
+        type: Number,
         required:true
     },
     password:{
@@ -23,7 +35,7 @@ const userSchema = new mongoose.Schema({
     salt:{
         type: String
     }
-})
+},{timestamps:true})
 
 userSchema.pre("save",function(next){
     try {

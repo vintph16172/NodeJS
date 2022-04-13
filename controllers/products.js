@@ -9,7 +9,7 @@ import Product from '../models/products'
 export const listProduct = async (request, response) => {
     console.log(request.query);
     const limitNumber = 20
-    const search = request.query.name ? +request.query.name : "";
+    const search = request.query.name ? request.query.name : "";
     const priceMin = request.query.price_gte ? +request.query.price_gte : "";
     const priceMax = request.query.price_lte ? +request.query.price_lte : "";
     const limit = request.query.limit ? +request.query.limit : limitNumber;
@@ -18,9 +18,13 @@ export const listProduct = async (request, response) => {
     try {
 
         if (search) {
-            const searchQuery = new RegExp(`${search}`);
-            console.log(re);
-            const product = await Product.find({ name: searchQuery }).exec()
+            // const searchQuery = new RegExp(`${search}`);
+            // console.log(searchQuery);
+            // const product = await Product.find({ name: searchQuery }).exec()
+            console.log("search",search);
+            const product = await Product.find({
+                name: { $regex: search, $options: "i" }
+              }).exec();
             response.json(product)
         } else if(priceMin && priceMax){
             const product = await Product.find().where('price').gte(priceMin).lte(priceMax).exec()
@@ -61,10 +65,15 @@ export const createProduct = async (request, response) => {
 export const deleteProduct = async (request, response) => {
     try {
         const product = await Product.findOneAndDelete({ _id: request.params.id }).exec()
+        console.log("Delete Product",product);
+        console.log("Delete Product ID",request.params.id);
         response.json(product);
     } catch (error) {
+        console.log("Delete Product Fail");
         response.status(400).json({ message: "Khong xoa duoc" })
     }
+
+
     // const product = products.filter(item => item.id != request.params.id)
     // response.json(product);
 }
