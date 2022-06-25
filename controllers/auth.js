@@ -8,7 +8,7 @@ export const signup = async (request,response)=>{
         if(exitsUser){
             return response.status(400).json({message: "User da ton tai"})
         }
-        const user = await User({email, name, password }).save()
+        const user = await User( {email, name, password }).save()
         response.json({
             user:{
                 _id: user._id,

@@ -37,6 +37,9 @@ app.use("/api",commentRoute)
 mongoose.connect('mongodb://localhost:27017/nodeJS');
 
 // Bước 3: lắng nghe cổng thực thi
-app.listen(8000, () => {
+
+const port = process.env.PORT || 8000
+
+app.listen(port, () => {
     console.log("Server is running on port 8000");
 });

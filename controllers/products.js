@@ -13,7 +13,7 @@ export const listProduct = async (request, response) => {
     const priceMin = request.query.price_gte ? +request.query.price_gte : "";
     const priceMax = request.query.price_lte ? +request.query.price_lte : "";
     const limit = request.query.limit ? +request.query.limit : limitNumber;
-    const sortBy = request.query.sortBy ? request.query.sortBy : '_id';
+    const sortBy = request.query.sortBy ? request.query.sortBy : '';
     const order = request.query.order ? request.query.order : 'desc';
     try {
 
@@ -28,6 +28,9 @@ export const listProduct = async (request, response) => {
             response.json(product)
         } else if(priceMin && priceMax){
             const product = await Product.find().where('price').gte(priceMin).lte(priceMax).exec()
+            response.json(product)
+        }else if(order){
+            const product = await Product.find().sort({"price": -1}).exec()
             response.json(product)
         }else {
             const product = await Product.find().exec()
