@@ -34,9 +34,12 @@ app.use("/api",detailCartRoute)
 app.use("/api",couponRoute)
 app.use("/api",commentRoute)
 
-mongoose.connect('mongodb://localhost:27017/nodeJS');
+const uri = "mongodb+srv://vipro292002:vipro292002@cluster0.sa6qa6v.mongodb.net/test?retryWrites=true&w=majority";
+// mongoose.connect('mongodb://localhost:27017/nodeJS');
+mongoose.connect(uri);
 
 // Bước 3: lắng nghe cổng thực thi
+
 
 const port = process.env.PORT || 8000
 
