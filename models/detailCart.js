@@ -1,4 +1,6 @@
-import mongoose, {ObjectId} from "mongoose";
+import mongoose from "mongoose";
+
+const { ObjectId } = mongoose
 
 const detailCartSchema = new mongoose.Schema({
     cart:{

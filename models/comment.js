@@ -1,4 +1,5 @@
-import mongoose, {ObjectId} from "mongoose";
+import mongoose from "mongoose";
+const {ObjectId } = mongoose
 
 const commentSchma = new mongoose.Schema({
     product:{
