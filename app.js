@@ -14,11 +14,15 @@ import commentRoute from './routes/comment'
 
 
 const app = express();
+const path = require("path");
+const logger = require("morgan");
 
 // const homeRoute = require('./routes/home');
 
 
-app.use(express.json())
+app.use(logger("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cors())
 // app.all('/', function (req, res, next) {
 //     res.header("Access-Control-Allow-Origin", "*");
@@ -40,6 +44,19 @@ mongoose.connect(uri);
 
 // Bước 3: lắng nghe cổng thực thi
 
+
+app.use(express.static(path.join(__dirname, "./frontend/build")));
+
+app.get("*", function (_, res) {
+  res.sendFile(
+    path.join(__dirname, "./frontend/build/index.html"),
+    function (err) {
+      if (err) {
+        res.status(500).send(err);
+      }
+    }
+  );
+});
 
 const port = process.env.PORT || 8000
 
