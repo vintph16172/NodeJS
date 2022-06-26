@@ -1,7 +1,7 @@
 // Bước 1: include thư viện http
 import express from 'express';
 import mongoose from 'mongoose';
-import homeRoute from './routes/home'
+import homeRoute from '../routes/home'
 import productRoute from "./routes/products"
 import categoryRoute from './routes/category'
 import { checkAuth } from './middlewares/checkAuth';
