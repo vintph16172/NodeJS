@@ -45,21 +45,21 @@ mongoose.connect(uri);
 // Bước 3: lắng nghe cổng thực thi
 
 
-app.use(express.static(path.join(__dirname, "./frontend/build")));
+// app.use(express.static(path.join(__dirname, "./frontend/build")));
 
-app.get("*", function (_, res) {
-  res.sendFile(
-    path.join(__dirname, "./frontend/build/index.html"),
-    function (err) {
-      if (err) {
-        res.status(500).send(err);
-      }
-    }
-  );
-});
+// app.get("*", function (_, res) {
+//   res.sendFile(
+//     path.join(__dirname, "./frontend/build/index.html"),
+//     function (err) {
+//       if (err) {
+//         res.status(500).send(err);
+//       }
+//     }
+//   );
+// });
 
-const port = process.env.PORT || 8000
+// const port = process.env.PORT || 8000
 
-app.listen(port, () => {
-    console.log("Server is running on port 8000");
-});
+// app.listen(port, () => {
+//     console.log("Server is running on port 8000");
+// });
