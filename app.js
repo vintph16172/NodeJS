@@ -40,7 +40,10 @@ app.use("/api",commentRoute)
 
 const uri = "mongodb+srv://vipro292002:vipro292002@cluster0.sa6qa6v.mongodb.net/test?retryWrites=true&w=majority";
 // mongoose.connect('mongodb://localhost:27017/nodeJS');
-mongoose.connect(uri);
+mongoose.connect(uri,{
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 // Bước 3: lắng nghe cổng thực thi
 
