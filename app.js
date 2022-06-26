@@ -11,16 +11,16 @@ import cartRoute from './routes/cart';
 import detailCartRoute from './routes/detailCart';
 import couponRoute from './routes/coupon'
 import commentRoute from './routes/comment'
-
+import path from 'path'
+import morgan from 'morgan'
 
 const app = express();
-const path = require("path");
-const logger = require("morgan");
+
 
 // const homeRoute = require('./routes/home');
 
 
-app.use(logger("dev"));
+app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors())
